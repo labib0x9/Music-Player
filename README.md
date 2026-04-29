@@ -79,7 +79,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
 - [done] `Prev() (*Node, bool)`  
   → move `Curr = Curr.Prev`, return it; return `nil, false` at head
 
-- [ ] `JumpTo(id int) (*Node, bool)`  
+- [done] `JumpTo(id int) (*Node, bool)`  
   → linear scan, set `Curr` to matching node
 
 - [done] `ToSlice() []Track`  

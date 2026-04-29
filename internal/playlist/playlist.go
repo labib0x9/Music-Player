@@ -133,6 +133,14 @@ func (p *Playlist) Prev() (*model.Node, bool) {
 // TODO: implement — linear scan from Head; O(n) is acceptable here
 func (p *Playlist) JumpTo(id int) (*model.Node, bool) {
 	// panic("JumpTo: not implemented")
+	cur := p.Head
+	for cur != nil {
+		if cur.Track.ID == id {
+			p.Curr = cur
+			return p.Curr, true
+		}
+		cur = cur.Next
+	}
 	return nil, false
 }
 
