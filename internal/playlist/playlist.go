@@ -104,8 +104,11 @@ func (p *Playlist) Next() (*model.Node, bool) {
 //
 // TODO: implement O(1) — just follow the Prev pointer
 func (p *Playlist) Prev() (*model.Node, bool) {
-	// panic("Prev: not implemented")
-	return nil, false
+	if p.Head == p.Curr {
+		return nil, false
+	}
+	p.Curr = p.Curr.Prev
+	return p.Curr, true
 }
 
 // JumpTo sets Curr to the node whose Track.ID equals id.

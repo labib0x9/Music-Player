@@ -76,7 +76,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
 - [done] `Next() (*Node, bool)`  
   → move `Curr = Curr.Next`, return it; return `nil, false` at tail
 
-- [ ] `Prev() (*Node, bool)`  
+- [done] `Prev() (*Node, bool)`  
   → move `Curr = Curr.Prev`, return it; return `nil, false` at head
 
 - [ ] `JumpTo(id int) (*Node, bool)`  
