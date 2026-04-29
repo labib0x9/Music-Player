@@ -30,7 +30,7 @@ func New() *Playlist {
 
 // AppendTrack adds a track to the tail of the list.
 //
-// TODO: implement
+// TODO (DONE): implement
 //   - create a new Node wrapping t
 //   - if the list is empty, set Head, Tail, and Curr to the new node
 //   - otherwise link the new node after Tail and update Tail
@@ -66,6 +66,22 @@ func (p *Playlist) AppendTrack(t model.Track) {
 //   - O(1)
 func (p *Playlist) PrependTrack(t model.Track) {
 	// panic("PrependTrack: not implemented")
+	node := &model.Node{
+		Track: t,
+		Prev:  p.Tail,
+		Next:  nil,
+	}
+
+	if p.Size == 0 {
+		p.Curr = node
+		p.Head = node
+		p.Tail = node
+	} else {
+		p.Head.Prev = node
+		p.Head = p.Head.Prev
+	}
+
+	p.Size++
 }
 
 // ─── Deletion ─────────────────────────────────────────────────────────────────
@@ -90,7 +106,7 @@ func (p *Playlist) RemoveCurrent() (model.Track, bool) {
 // Next advances Curr to the next node and returns it.
 // Returns (nil, false) when already at the tail.
 //
-// TODO: implement O(1) — just follow the Next pointer
+// TODO (DONE): implement O(1) — just follow the Next pointer
 func (p *Playlist) Next() (*model.Node, bool) {
 	if p.Tail == p.Curr {
 		return nil, false
@@ -102,7 +118,7 @@ func (p *Playlist) Next() (*model.Node, bool) {
 // Prev moves Curr to the previous node and returns it.
 // Returns (nil, false) when already at the head.
 //
-// TODO: implement O(1) — just follow the Prev pointer
+// TODO (DONE): implement O(1) — just follow the Prev pointer
 func (p *Playlist) Prev() (*model.Node, bool) {
 	if p.Head == p.Curr {
 		return nil, false

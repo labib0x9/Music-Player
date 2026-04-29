@@ -66,7 +66,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
 - [done] `AppendTrack(t Track)`  
   → insert at tail, update `Head`/`Tail`/`Curr`, increment `Size`
 
-- [ ] `PrependTrack(t Track)`  
+- [done] `PrependTrack(t Track)`  
   → insert at head, update `Head`/`Tail`/`Curr`, increment `Size`
 
 - [ ] `RemoveCurrent() (Track, bool)`  
