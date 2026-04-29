@@ -43,6 +43,8 @@ func main() {
 		eng.AddTrack(t)
 	}
 
+	// eng.Traverse()
+
 	// ── 4. Launch Bubble Tea ───────────────────────────────────────────────
 	prog := tea.NewProgram(
 		ui.New(eng),

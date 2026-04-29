@@ -7,7 +7,11 @@
 // ╚══════════════════════════════════════════════════════════════╝
 package playlist
 
-import "github.com/yourname/music-player/internal/model"
+import (
+	"fmt"
+
+	"github.com/yourname/music-player/internal/model"
+)
 
 // Playlist is a doubly linked list used as the active playback queue.
 type Playlist struct {
@@ -31,9 +35,25 @@ func New() *Playlist {
 //   - if the list is empty, set Head, Tail, and Curr to the new node
 //   - otherwise link the new node after Tail and update Tail
 //   - increment Size
-// 	-  O(1)
+//   - O(1)
 func (p *Playlist) AppendTrack(t model.Track) {
-	panic("AppendTrack: not implemented")
+	// panic("AppendTrack: not implemented")
+	node := &model.Node{
+		Track: t,
+		Prev:  p.Tail,
+		Next:  nil,
+	}
+
+	if p.Size == 0 {
+		p.Curr = node
+		p.Head = node
+		p.Tail = node
+	} else {
+		p.Tail.Next = node
+		p.Tail = p.Tail.Next
+	}
+
+	p.Size++
 }
 
 // PrependTrack adds a track to the head of the list.
@@ -43,9 +63,9 @@ func (p *Playlist) AppendTrack(t model.Track) {
 //   - if the list is empty, set Head, Tail, and Curr to the new node
 //   - otherwise link the new node before Head and update Head
 //   - increment Size
-// 	-  O(1)
+//   - O(1)
 func (p *Playlist) PrependTrack(t model.Track) {
-	panic("PrependTrack: not implemented")
+	// panic("PrependTrack: not implemented")
 }
 
 // ─── Deletion ─────────────────────────────────────────────────────────────────
@@ -59,9 +79,10 @@ func (p *Playlist) PrependTrack(t model.Track) {
 //   - update Head/Tail if needed
 //   - decrement Size
 //   - return the removed track
-// 	-  O(1)
+//   - O(1)
 func (p *Playlist) RemoveCurrent() (model.Track, bool) {
-	panic("RemoveCurrent: not implemented")
+	// panic("RemoveCurrent: not implemented")
+	return model.Track{}, false
 }
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
@@ -71,7 +92,8 @@ func (p *Playlist) RemoveCurrent() (model.Track, bool) {
 //
 // TODO: implement O(1) — just follow the Next pointer
 func (p *Playlist) Next() (*model.Node, bool) {
-	panic("Next: not implemented")
+	// panic("Next: not implemented")
+	return nil, false
 }
 
 // Prev moves Curr to the previous node and returns it.
@@ -79,7 +101,8 @@ func (p *Playlist) Next() (*model.Node, bool) {
 //
 // TODO: implement O(1) — just follow the Prev pointer
 func (p *Playlist) Prev() (*model.Node, bool) {
-	panic("Prev: not implemented")
+	// panic("Prev: not implemented")
+	return nil, false
 }
 
 // JumpTo sets Curr to the node whose Track.ID equals id.
@@ -87,7 +110,8 @@ func (p *Playlist) Prev() (*model.Node, bool) {
 //
 // TODO: implement — linear scan from Head; O(n) is acceptable here
 func (p *Playlist) JumpTo(id int) (*model.Node, bool) {
-	panic("JumpTo: not implemented")
+	// panic("JumpTo: not implemented")
+	return nil, false
 }
 
 // ─── Query helpers ────────────────────────────────────────────────────────────
@@ -108,7 +132,8 @@ func (p *Playlist) IsEmpty() bool {
 //
 // TODO: implement — walk from Head to Tail, append each Track
 func (p *Playlist) ToSlice() []model.Track {
-	panic("ToSlice: not implemented")
+	// panic("ToSlice: not implemented")
+	return []model.Track{}
 }
 
 // AtHead reports whether Curr is the first node.
@@ -119,4 +144,12 @@ func (p *Playlist) AtHead() bool {
 // AtTail reports whether Curr is the last node.
 func (p *Playlist) AtTail() bool {
 	return p.Curr != nil && p.Curr == p.Tail
+}
+
+func (p *Playlist) Traverse() {
+	cur := p.Head
+	for cur != nil {
+		fmt.Println(cur.Track.Title)
+		cur = cur.Next
+	}
 }

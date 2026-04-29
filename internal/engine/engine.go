@@ -44,23 +44,23 @@ func (s PlayerState) String() string {
 // Snapshot is a read-only view of engine state that the UI renders.
 // The UI should only ever read this — never mutate engine internals.
 type Snapshot struct {
-	State       PlayerState
+	State        PlayerState
 	CurrentTrack *model.Track  // nil when stopped/empty
-	Tracks      []model.Track  // ordered snapshot of the queue
-	Elapsed     time.Duration
-	Total       time.Duration
-	CursorIndex int            // which track in Tracks is currently playing
-	RepeatOne   bool
+	Tracks       []model.Track // ordered snapshot of the queue
+	Elapsed      time.Duration
+	Total        time.Duration
+	CursorIndex  int // which track in Tracks is currently playing
+	RepeatOne    bool
 }
 
 // Engine wires together the playlist (linked list) and audio backend.
 type Engine struct {
-	mu       sync.RWMutex
-	pl       *playlist.Playlist
-	audio    *audio.Backend
-	state    PlayerState
-	elapsed  time.Duration
-	start    time.Time  // time.Time when last Play() was called
+	mu        sync.RWMutex
+	pl        *playlist.Playlist
+	audio     *audio.Backend
+	state     PlayerState
+	elapsed   time.Duration
+	start     time.Time // time.Time when last Play() was called
 	repeatOne bool
 }
 
@@ -296,4 +296,10 @@ func (e *Engine) watchDone() {
 		}
 		e.mu.Unlock()
 	}
+}
+
+func (e *Engine) Traverse() {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	e.pl.Traverse()
 }

@@ -63,7 +63,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
 
 ### Checklist
 
-- [ ] `AppendTrack(t Track)`  
+- [done] `AppendTrack(t Track)`  
   → insert at tail, update `Head`/`Tail`/`Curr`, increment `Size`
 
 - [ ] `PrependTrack(t Track)`  
