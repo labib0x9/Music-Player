@@ -167,9 +167,7 @@ func (e *Engine) Next() {
 		e.state = StateStopped
 		return
 	}
-	if e.state == StatePlaying || e.state == StatePaused {
-		e.loadAndPlay()
-	}
+	e.loadAndPlay()
 }
 
 // Prev goes back to the previous track.
@@ -183,9 +181,7 @@ func (e *Engine) Prev() {
 	if !ok {
 		return
 	}
-	if e.state == StatePlaying || e.state == StatePaused {
-		e.loadAndPlay()
-	}
+	e.loadAndPlay()
 }
 
 // JumpTo plays the track with the given ID.

@@ -1,7 +1,10 @@
-// Package audio provides a thin wrapper around faiface/beep for
+// Package audio provides a thin wrapper around gopxl/beep for
 // play / pause / resume / stop operations.
 // It runs the playback loop in its own goroutine and communicates
 // progress and end-of-track events via channels.
+//
+// Mac note: gopxl/beep uses oto v3 which works natively on macOS
+// with CoreAudio — no portaudio install needed.
 package audio
 
 import (
@@ -11,12 +14,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/faiface/beep"
-	"github.com/faiface/beep/flac"
-	"github.com/faiface/beep/mp3"
-	"github.com/faiface/beep/speaker"
-	"github.com/faiface/beep/vorbis"
-	"github.com/faiface/beep/wav"
+	"github.com/gopxl/beep"
+	"github.com/gopxl/beep/flac"
+	"github.com/gopxl/beep/mp3"
+	"github.com/gopxl/beep/speaker"
+	"github.com/gopxl/beep/vorbis"
+	"github.com/gopxl/beep/wav"
 )
 
 const sampleRate = beep.SampleRate(44100)
@@ -28,7 +31,7 @@ type DoneMsg struct{}
 type Backend struct {
 	mu      sync.Mutex
 	ctrl    *beep.Ctrl   // pause / resume
-	done    chan DoneMsg  // signals end-of-track to engine
+	done    chan DoneMsg // signals end-of-track to engine
 	closeFn func() error // closes the current decoder
 	elapsed time.Duration
 	total   time.Duration
