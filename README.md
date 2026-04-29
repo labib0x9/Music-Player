@@ -82,7 +82,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
 - [ ] `JumpTo(id int) (*Node, bool)`  
   → linear scan, set `Curr` to matching node
 
-- [ ] `ToSlice() []Track`  
+- [done] `ToSlice() []Track`  
   → walk head→tail, collect all `Track` values
 
 ### Edge Cases to Handle

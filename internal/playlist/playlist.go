@@ -154,8 +154,13 @@ func (p *Playlist) IsEmpty() bool {
 //
 // TODO: implement — walk from Head to Tail, append each Track
 func (p *Playlist) ToSlice() []model.Track {
-	// panic("ToSlice: not implemented")
-	return []model.Track{}
+	all := make([]model.Track, 0)
+	cur := p.Head
+	for cur != nil {
+		all = append(all, cur.Track)
+		cur = cur.Next
+	}
+	return all
 }
 
 // AtHead reports whether Curr is the first node.
