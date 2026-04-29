@@ -73,7 +73,7 @@ All the logic in **`internal/playlist/playlist.go`** is left for you.
   → unlink `Curr`, re-link neighbours, update `Head`/`Tail`, decrement `Size`  
   → advance `Curr` to Next (or Prev if at tail)
 
-- [ ] `Next() (*Node, bool)`  
+- [done] `Next() (*Node, bool)`  
   → move `Curr = Curr.Next`, return it; return `nil, false` at tail
 
 - [ ] `Prev() (*Node, bool)`  

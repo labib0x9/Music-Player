@@ -92,8 +92,11 @@ func (p *Playlist) RemoveCurrent() (model.Track, bool) {
 //
 // TODO: implement O(1) — just follow the Next pointer
 func (p *Playlist) Next() (*model.Node, bool) {
-	// panic("Next: not implemented")
-	return nil, false
+	if p.Tail == p.Curr {
+		return nil, false
+	}
+	p.Curr = p.Curr.Next
+	return p.Curr, true
 }
 
 // Prev moves Curr to the previous node and returns it.
